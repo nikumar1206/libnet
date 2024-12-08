@@ -37,6 +37,8 @@ func (r *REPL) Run() {
 			r.Close()
 		case ACTION_CLEAR:
 			r.Clear()
+		case ACTION_SUSPEND:
+			panic("Not implemented. Get gud.")
 		default:
 			// read and write to connection
 			r.conn.Write(userInput)

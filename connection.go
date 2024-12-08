@@ -14,8 +14,6 @@ type Connection interface {
 
 func NewConnection(c Config) Connection {
 	switch c.protocol {
-	case ProtocolTCP:
-		return NewTCPConnection(&c)
 	case ProtocolUDP:
 		return NewUDPConnection(&c)
 	default:
@@ -98,5 +96,6 @@ func (t *UDPConnection) Close() error {
 }
 
 func getFullAddress(c Connection) string {
-	return fmt.Sprintf("%s://%s", c.GetConn().RemoteAddr().Network(), c.GetConn().RemoteAddr().String())
+	addr := c.GetConn().RemoteAddr()
+	return fmt.Sprintf("%s://%s", addr.Network(), addr.String())
 }
